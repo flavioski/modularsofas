@@ -1,6 +1,6 @@
 /**
- * Salus per Aquam
- * Copyright since 2021 Flavio Pellizzer and Contributors
+ * Modular Sofas
+ * Copyright since 2022 Flavio Pellizzer and Contributors
  * <Flavio Pellizzer> Property
  *
  * NOTICE OF LICENSE
