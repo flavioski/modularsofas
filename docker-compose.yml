@@ -1,0 +1,156 @@
+# Examples architectures:
+# - https://github.com/LouisBertin/prestashop1.7-docker-lamp
+#
+# Useful commands
+#
+# run container: docker-compose up -d
+# stop container: docker-compose down
+# rebuild container: docker-compose up -d --build
+# enter into web container: docker exec -it CONTAINER_NAME bash
+# install npm dependencies: docker exec -it CONTAINER_NAME npm i --prefix YOUR/FOLDER/PATH
+# build assets with npm: docker exec -it CONTAINER_NAME run build --prefix YOUR/FOLDER/PATH
+# watch assets with npm: docker exec -it CONTAINER_NAME run build --prefix YOUR/FOLDER/PATH
+# database dump: docker exec -it CONTAINER_NAME mysqldump --single-transaction -u root --password=root YOUR_DB_NAME > YOUR_BACKUP.sql
+#
+version: '3.3'
+
+#networks:
+#  prestashop-network:
+#    driver: bridge
+services:
+  db:
+    image: mysql:5.7
+    container_name: modularsofas-db
+    volumes:
+      - db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=presta
+      - MYSQL_DATABASE=presta
+      - MYSQL_USER=presta
+      - MYSQL_PASSWORD=presta
+    #networks:
+    #  - prestashop-network
+
+  php:
+    image: phpdockerio/php74-cli
+    container_name: modularsofas-php
+    volumes:
+      - ./:/var/www/html/modules/modularsofas
+    working_dir: /var/www/html/modules/modularsofas
+    environment:
+      _PS_ROOT_DIR_: /var/www/html
+    #networks:
+    #  - prestashop-network
+    depends_on:
+      - prestashop
+
+#  node:
+#    image: node:14.19.0
+#    container_name: modularsofas-node
+#    #restart: always
+#    volumes:
+#      - ./:/var/www/html/modules/modularsofas
+#      - presta:/var/www/html
+#  #    #- node_modules:/var/www/html/modules/modularsofas/js/node_modules
+#    working_dir: /var/www/html/modules/modularsofas
+#  #  environment:
+#  #    PATH: /var/www/html/_dev/node_modules/.bin/:$PATH
+#  #    NODE_ENV: development
+#  #  expose:
+#  #    - "8081"
+#    networks:
+#      - prestashop-network
+#    command: "/bin/bash -c 'cp /var/www/html/modules/modularsofas/admin-dev/themes/new-theme/package.json /var/www/html/manage/themes/new-theme/ &&
+#    cp /var/www/html/modules/modularsofas/admin-dev/themes/new-theme/js/components/grid/extension/filters-reset-extension.js /var/www/html/manage/themes/new-theme/js/components/grid/extension/filters-reset-extension.js &&
+#    cp /var/www/html/modules/modularsofas/admin-dev/themes/new-theme/js/components/grid/extension/sorting-extension.js /var/www/html/manage/themes/new-theme/js/components/grid/extension/sorting-extension.js &&
+#    cd /var/www/html/manage/themes/new-theme && yarn install &&
+#    cd /var/www/html/modules/modularsofas/js && yarn install && npm run watch'"
+#    depends_on:
+#      - prestashop
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: modularsofas-phpmyadmin
+    ports:
+      - '9080:80'
+      - '9943:443'
+    #networks:
+    #  - prestashop-network
+    environment:
+      - PMA_HOST=db
+    depends_on:
+      - db
+
+  mailcatcher:
+    #restart: on-failure:10
+    image: dockage/mailcatcher:0.7.1
+    container_name: modularsofas-mailcatcher
+    ports:
+      - '1080:1080'
+      - '1025:1025'
+    #networks:
+    #  - prestashop-network
+    depends_on:
+      - prestashop
+      - php
+
+  prestashop:
+    image: prestashop/prestashop:latest
+    container_name: modularsofas-prestashop
+    ports:
+      - '80:80'
+      - '443:443'
+    #networks:
+    #  - prestashop-network
+    # https://stackoverflow.com/questions/70725881/what-is-the-equivalent-of-add-host-host-docker-internalhost-gateway-in-a-comp
+    # https://stackoverflow.com/questions/31324981/how-to-access-host-port-from-docker-container
+    # https://github.com/docker/for-linux/issues/264#issuecomment-965465879
+    #command: "/bin/bash -c 'apt update && apt -y install netcat'"
+    #(inside docker container) $ nc -vz host.docker.internal 80
+    #(inside docker container) $  curl --cacert /var/www/html/modules/modularsofas/Resources/data/cacert.pem -I https://wcf.test:8443/wsdl.php
+    #(inside docker container) $  curl -k -I https://wcf.test:8443/wsdl.php
+    #network_mode: bridge
+    extra_hosts:
+      #- "host.docker.internal:host-gateway"
+      #- "docker.for.mac.host.internal:host-gateway"
+      - "wcf.test:host-gateway"
+    restart: always
+    environment:
+      - PS_DEV_MODE=true
+      - PS_DOMAIN=localhost
+      - PS_DEMO_MODE=true
+      - DB_SERVER=db
+      - DB_USER=presta
+      - DB_PASSWD=presta
+      - DB_PREFIX=ps_
+      - DB_NAME=presta
+      - PS_INSTALL_AUTO=1
+      - PS_LANGUAGE=it
+      - PS_COUNTRY=IT
+      - PS_FOLDER_ADMIN=manage
+      - PS_FOLDER_INSTALL=install.old
+      - ADMIN_MAIL=flappio.pelliccia@gmail.com
+      - ADMIN_PASSWD=adminadmin
+ #   command: "sh /run-from-compose.sh"
+    volumes:
+      - ./:/var/www/html/modules/modularsofas
+      - presta:/var/www/html
+      - ./Resources/certs/cacert.pem:/usr/local/share/ca-certificates/cacert.pem
+  #    - ./.docker/php7.4/php.ini:/tmp/php.ini
+  #    - ./.docker/run-from-compose.sh:/run-from-compose.sh
+  #    - ${PWD}/admin-dev/themes/new-theme/package.json:/var/www/html/manage/themes/new-theme/package.json
+    depends_on:
+      - db
+
+  filebrowser:
+    image: filebrowser/filebrowser:latest
+    container_name: modularsofas-filebrowser
+    ports:
+      - 9090:80
+    #networks:
+    #  - prestashop-network
+    volumes:
+      - presta:/srv
+volumes:
+  db_data: {}
+  presta: {}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<module>
+  <name>modularsofas</name>
+  <displayName><![CDATA[Salus Per Aquam]]></displayName>
+  <version><![CDATA[0.1.0]]></version>
+  <description><![CDATA[Modular fabric leather coated sofas plugin PrestaShop.]]></description>
+  <author><![CDATA[Flavio Pellizzer]]></author>
+  <tab><![CDATA[front_office_features]]></tab>
+  <is_configurable>1</is_configurable>
+  <need_instance>0</need_instance>
+  <limited_countries></limited_countries>
+</module>
