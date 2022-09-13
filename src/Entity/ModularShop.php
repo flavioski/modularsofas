@@ -20,7 +20,10 @@
  */
 declare(strict_types=1);
 
-namespace Flavioski\Module\SalusPerAquam\Entity;
+namespace Flavioski\Module\ModularSofas\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use PrestaShopBundle\Entity\Shop;
 
 /**
  * @ORM\Table()
@@ -28,5 +31,59 @@ namespace Flavioski\Module\SalusPerAquam\Entity;
  */
 class ModularShop
 {
+    /**
+     * @var Modular
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Flavioski\Module\ModularSofas\Entity\Modular", inversedBy="modularLangs")
+     * @ORM\JoinColumn(name="id_modular", referencedColumnName="id_modular", nullable=false)
+     */
+    private $modular;
 
+    /**
+     * @var Shop
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="PrestaShopBundle\Entity\Shop")
+     * @ORM\JoinColumn(name="id_shop", referencedColumnName="id_shop", nullable=false, onDelete="CASCADE")
+     */
+    private $shop;
+
+    /**
+     * @return Modular
+     */
+    public function getModular()
+    {
+        return $this->modular;
+    }
+
+    /**
+     * @param Modular $modular
+     *
+     * @return $this
+     */
+    public function setModular(Modular $modular)
+    {
+        $this->modular = $modular;
+
+        return $this;
+    }
+
+    /**
+     * @return Shop
+     */
+    public function getShop()
+    {
+        return $this->shop;
+    }
+
+    /**
+     * @param Shop $shop
+     *
+     * @return $this
+     */
+    public function setShop(Shop $shop)
+    {
+        $this->shop = $shop;
+
+        return $this;
+    }
 }
