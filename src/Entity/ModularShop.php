@@ -34,7 +34,7 @@ class ModularShop
     /**
      * @var Modular
      * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Flavioski\Module\ModularSofas\Entity\Modular", inversedBy="modularLangs")
+     * @ORM\ManyToOne(targetEntity="Flavioski\Module\ModularSofas\Entity\Modular", inversedBy="modularShops")
      * @ORM\JoinColumn(name="id_modular", referencedColumnName="id_modular", nullable=false)
      */
     private $modular;
