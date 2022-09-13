@@ -20,7 +20,7 @@
  */
 declare(strict_types=1);
 
-namespace Flavioski\Module\SalusPerAquam\Entity;
+namespace Flavioski\Module\ModularSofas\Entity;
 
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -229,6 +229,55 @@ class Modular
     }
 
     /**
+     * @param int $shopId
+     * @param int $productId
+     * @param int $attributeId
+     *
+     * @return ModularProduct|null
+     */
+    public function getModularProductByShopIdProductIdAttributeId(int $shopId, int $productId, int $attributeId)
+    {
+        foreach ($this->modularProducts as $modularProduct) {
+            if (
+                $shopId === $modularProduct->getShop->getId()
+                && $productId === $modularProduct->getProduct->getId()
+                && $attributeId === $modularProduct->getAttribute->getId()
+            ) {
+                return $modularProduct;
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * @param ModularProduct $modularProduct
+     *
+     * @return this
+     */
+    public function addModularProduct(ModularProduct $modularProduct)
+    {
+        $modularProduct->setModular($this);
+        $this->modularProducts->add($modularProduct);
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getModularProductPosition()
+    {
+        if ($this->modularProducts->count() <= 0) {
+            return 1;
+        }
+
+        $modularProduct = $this->modularProducts->first();
+
+        return $modularProduct->getPosition();
+    }
+
+    /**
      * @param int $langId
      *
      * @return ModularLang|null
@@ -255,6 +304,20 @@ class Modular
         $this->modularLangs->add($modularLang);
 
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getModularName()
+    {
+        if ($this->modularLangs->count() <= 0) {
+            return '';
+        }
+
+        $modularLang = $this->modularLangs->first();
+
+        return $modularLang->getName();
     }
 
     /**
