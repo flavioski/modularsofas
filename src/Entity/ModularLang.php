@@ -20,7 +20,10 @@
  */
 declare(strict_types=1);
 
-namespace Flavioski\Module\SalusPerAquam\Entity;
+namespace Flavioski\Module\ModularSofas\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+use PrestaShopBundle\Entity\Lang;
 
 /**
  * @ORM\Table()
@@ -28,5 +31,111 @@ namespace Flavioski\Module\SalusPerAquam\Entity;
  */
 class ModularLang
 {
+    /**
+     * @var Modular
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="Flavioski\Module\ModularSofas\Entity\Modular", inversedBy="modularLangs")
+     * @ORM\JoinColumn(name="id_modular", referencedColumnName="id_modular", nullable=false)
+     */
+    private $modular;
 
+    /**
+     * @var Lang
+     * @ORM\Id
+     * @ORM\ManyToOne(targetEntity="PrestaShopBundle\Entity\Lang")
+     * @ORM\JoinColumn(name="id_lang", referencedColumnName="id_lang", nullable=false, onDelete="CASCADE")
+     */
+    private $lang;
+
+    /**
+     * @var string
+     * @ORM\Column(name="name", type="string", nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     * @ORM\Column(name="content", type="string", nullable=false)
+     */
+    private $content;
+
+    /**
+     * @return Modular
+     */
+    public function getModular()
+    {
+        return $this->modular;
+    }
+
+    /**
+     * @param Modular $modular
+     *
+     * @return $this
+     */
+    public function setModular(Modular $modular)
+    {
+        $this->modular = $modular;
+
+        return $this;
+    }
+
+    /**
+     * @return Lang
+     */
+    public function getLang()
+    {
+        return $this->lang;
+    }
+
+    /**
+     * @param Lang $lang
+     *
+     * @return $this
+     */
+    public function setLang(Lang $lang)
+    {
+        $this->lang = $lang;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     *
+     * @return $this
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getContent()
+    {
+        return $this->content;
+    }
+
+    /**
+     * @param string $content
+     *
+     * @return $this
+     */
+    public function setContent(string $content)
+    {
+        $this->content = $content;
+
+        return $this;
+    }
 }
