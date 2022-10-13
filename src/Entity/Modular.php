@@ -253,7 +253,7 @@ class Modular
     /**
      * @param ModularProduct $modularProduct
      *
-     * @return this
+     * @return $this
      */
     public function addModularProduct(ModularProduct $modularProduct)
     {
