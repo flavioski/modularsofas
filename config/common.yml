@@ -4,3 +4,14 @@ services:
 # declared as public.
 #  _defaults:
 #   public: true
+  flavioski.module.modularsofas.repository.modular_repository:
+    class: Flavioski\Module\ModularSofas\Repository\ModularRepository
+    factory: ['@doctrine.orm.default_entity_manager', getRepository]
+    arguments:
+      - Flavioski\Module\ModularSofas\Entity\Modular
+
+  flavioski.module.modularsofas.modularsofas.install:
+    class: Flavioski\Module\ModularSofas\Database\ModularSofasInstaller
+    arguments:
+      - '@doctrine.dbal.default_connection'
+      - '%database_prefix%'
