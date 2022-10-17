@@ -103,7 +103,7 @@ class ModularSofas extends Module
             $this->installConfiguration() && parent::install() &&
             $this->registerHooks() &&
             $this->installTab()
-            ;
+        ;
     }
 
     /**
@@ -117,7 +117,7 @@ class ModularSofas extends Module
             $this->uninstallConfiguration() && parent::uninstall() &&
             $this->unregisterHooks() &&
             $this->uninstallTab()
-            ;
+        ;
     }
 
     /**
@@ -135,7 +135,7 @@ class ModularSofas extends Module
         return parent::enable($force_all)
             && $this->registerHooks()
             && $this->installTab()
-            ;
+        ;
     }
 
     /**
@@ -153,7 +153,7 @@ class ModularSofas extends Module
         return parent::disable($force_all)
             && $this->unregisterHooks()
             && $this->uninstallTab()
-            ;
+        ;
     }
 
     /**
@@ -346,12 +346,12 @@ class ModularSofas extends Module
             foreach ($this->configurationList as $name => $value) {
                 if (false === Configuration::hasKey($name, null, null, (int) $shopId)) {
                     $result = $result && (bool) Configuration::updateValue(
-                            $name,
-                            $value,
-                            false,
-                            null,
-                            (int) $shopId
-                        );
+                        $name,
+                        $value,
+                        false,
+                        null,
+                        (int) $shopId
+                    );
                 }
             }
         }
@@ -366,7 +366,7 @@ class ModularSofas extends Module
      */
     public function uninstallConfiguration()
     {
-        foreach($this->configurationList as $name => $value) {
+        foreach ($this->configurationList as $name => $value) {
             if (!Configuration::deleteByName($name)) {
                 return false;
             }
@@ -386,5 +386,4 @@ class ModularSofas extends Module
             Context::getContext()->link->getAdminLink('AdminModularSofasConfiguration')
         );
     }
-
 }

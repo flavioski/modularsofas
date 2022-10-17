@@ -48,7 +48,7 @@ class ModularSofasInstaller
      */
     public function __construct(
         Connection $connection,
-                   $dbPrefix
+        $dbPrefix
     ) {
         $this->connection = $connection;
         $this->dbPrefix = $dbPrefix;
