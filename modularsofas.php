@@ -382,9 +382,9 @@ class ModularSofas extends Module
     {
         // This controller actually does not exist, it is used in the tab
         // and is accessible thanks to routing settings with _legacy_link
-        //Tools::redirectAdmin(
-        //    Context::getContext()->link->getAdminLink('AdminModularsofasConfiguration')
-        //);
+        Tools::redirectAdmin(
+            Context::getContext()->link->getAdminLink('AdminModularSofasConfiguration')
+        );
     }
 
 }

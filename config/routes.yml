@@ -2,3 +2,11 @@
 # @see https://devdocs.prestashop.com/1.7/modules/concepts/controllers/admin-controllers/tabs/
 #
 # configuration
+# configuration
+flavioski_modularsofas_configuration_index:
+  path: /modularsofas/configuration
+  methods: [GET]
+  defaults:
+    _controller: 'Flavioski\Module\ModularSofas\Controller\Admin\ConfigurationController::indexAction'
+    _legacy_controller: 'AdminModularSofasConfiguration'
+    _legacy_link: 'AdminModularSofasConfiguration'
