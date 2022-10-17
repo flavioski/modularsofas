@@ -55,7 +55,7 @@ class ModularLang
 
     /**
      * @var string
-     * @ORM\Column(name="content", type="string", nullable=false)
+     * @ORM\Column(name="content", type="string", length=65535, nullable=false)
      */
     private $content;
 
