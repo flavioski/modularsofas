@@ -25,6 +25,7 @@ namespace Flavioski\Module\ModularSofas\Entity;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use PrestaShopBundle\Entity\Shop;
 
 /**
  * @ORM\Table()
@@ -53,9 +54,13 @@ class Modular
     private $modularLangs;
 
     /**
-     * @ORM\OneToMany(targetEntity="Flavioski\Module\ModularSofas\Entity\ModularShop", cascade="{persist", "remove"}, mappedBy="modular")
+     * @ORM\ManyToMany(targetEntity="PrestaShopBundle\Entity\Shop", cascade={"persist"})
+     * @ORM\JoinTable(
+     *      joinColumns={@ORM\JoinColumn(name="id_modular", referencedColumnName="id_modular")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="id_shop", referencedColumnName="id_shop", onDelete="CASCADE")}
+     * )
      */
-    private $modularShops;
+    private $shops;
 
     /**
      * @var string
@@ -133,11 +138,37 @@ class Modular
     }
 
     /**
-     * @return ArrayCollection
+     * Get shops.
+     *
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getModularShops()
+    public function getShops()
     {
-        return $this->modularShops;
+        return $this->shops;
+    }
+
+    /**
+     * Add shop.
+     *
+     * @param \PrestaShopBundle\Entity\Shop $shop
+     *
+     * @return Modular
+     */
+    public function addShop(Shop $shop)
+    {
+        $this->shops[] = $shop;
+
+        return $this;
+    }
+
+    /**
+     * Remove shop.
+     *
+     * @param \PrestaShopBundle\Entity\Shop $shop
+     */
+    public function removeShop(Shop $shop)
+    {
+        $this->shops->removeElement($shop);
     }
 
     /**
