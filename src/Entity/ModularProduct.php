@@ -49,7 +49,7 @@ class ModularProduct
     /**
      * @var int
      *
-     * @ORM\Column(name="id_product_attribute", type="integer", options={"unsigned"=true}, nullable=true)
+     * @ORM\Column(name="id_product_attribute", type="integer", options={"unsigned"=true}, nullable=false)
      */
     private $productAttributeId;
 
