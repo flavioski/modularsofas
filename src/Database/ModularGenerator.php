@@ -119,7 +119,7 @@ class ModularGenerator
                     $modularShop->setShop($shop);
                     if (isset($modularData['shop'][$shop->getId()])) {
                         $modularShop->setId($modularData['shop'][$shop->getId()]);
-                } else {
+                    } else {
                         $modularShop->setId($modularData['shop']['id']);
                     }
                     $modularShop->addModularShop($modularShop);
