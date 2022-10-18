@@ -24,12 +24,12 @@ flavioski_modularsofas_modular_index:
     sortOrder: last
   requirements:
     limit: _limit|last|\d+
-    orderBy: last|id_product|name|code|price|active
+    orderBy: last|id_modular|name|code|active
     offset: last|\d+
     sortOrder: last|asc|desc
 
 flavioski_modularsofas_modular_generate:
-  path: /modularsofas/generate
+  path: /modularsofas/modular/generate
   methods: [GET, POST]
   defaults:
     _controller: 'Flavioski\Module\ModularSofas\Controller\Admin\ModularController::generateAction'
