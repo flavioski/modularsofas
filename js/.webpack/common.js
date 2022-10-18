@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const cssExtractedFileName = 'theme';
 
-// PrestShop folders, we use process.env.PWD instead of __dirname in case the module is symlinked
+// PrestaShop folders, we use process.env.PWD instead of __dirname in case the module is symlinked
 const psRootDir = path.resolve(process.env.PWD, '../../../');
 const psJsDir = path.resolve(psRootDir, 'manage/themes/new-theme/js');
 const psComponentsDir = path.resolve(psJsDir, 'components');
@@ -15,8 +15,8 @@ module.exports = {
     jquery: 'jQuery',
   },
   entry: {
-    modularsofas: './modularsofas',
-    modularsofas_form: './modularsofas/form',
+    modulars: './modulars',
+    modular_form: './modulars/form',
   },
   output: {
     path: path.resolve(__dirname, '../../views/js'),
@@ -34,7 +34,7 @@ module.exports = {
     rules: [
       {
         test: /\.js$/,
-        include: path.resolve(__dirname, '../modularsofas'),
+        include: path.resolve(__dirname, '../modulars'),
         use: [{
           loader: 'babel-loader',
           options: {
