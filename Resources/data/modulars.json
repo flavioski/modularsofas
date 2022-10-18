@@ -1,0 +1,121 @@
+[
+  {
+    "code": "Pierre Augustin Caron de Beaumarchais",
+    "name": {
+      "en": "Proving that I am right would be admitting that I could be wrong.",
+      "fr": "Prouver que j'ai raison serait accorder que je puis avoir tort."
+    }
+  },
+  {
+    "code": "Georges Bernanos",
+    "name": {
+      "en": "There are no half-truths.",
+      "fr": "Il n'y a pas de verités moyennes."
+    }
+  },
+  {
+    "code": "Denis Diderot",
+    "name": {
+      "en": "Being a fool sometimes does not make one a fool all the time.",
+      "fr": "On n'est point toujours une bête pour l'avoir été quelquefois."
+    }
+  },
+  {
+    "code": "René Descartes",
+    "name": {
+      "en": "I think, therefore, I am.",
+      "fr": "Je pense, donc, je suis."
+    }
+  },
+  {
+    "code": "Jean Giono",
+    "name": {
+      "en": "To imagine is to choose.",
+      "fr": "Imaginer c'est choisir."
+    }
+  },
+  {
+    "code": "Claude Lévi-Strauss",
+    "name": {
+      "en": "The world began without man and it will end without him.",
+      "fr": "Le monde a commencé sans l'homme et il s'achèvera sans lui."
+    }
+  },
+  {
+    "code": "Eugène Ionesco",
+    "name": {
+      "en": "Reason is the madness of the strongest. The reason of those less strong is madness.",
+      "fr": "La Raison c'est la folie du plus fort. La raison du moins fort c'est de la folie."
+    }
+  },
+  {
+    "code": "Blaise Pascal",
+    "name": {
+      "en": "In a great mind everything is great.",
+      "fr": "Dans une grande âme tout est grand."
+    }
+  },
+  {
+    "code": "Charles de Gaulle",
+    "name": {
+      "en": "French people are calves.",
+      "fr": "Les Français sont des veaux."
+    }
+  },
+  {
+    "code": "Michel de Montaigne",
+    "name": {
+      "en": "They teach us to live when life is past.",
+      "fr": "On nous apprend à vivre quand la vie est passée."
+    }
+  },
+  {
+    "code": "Henri Poincaré",
+    "name": {
+      "en": "Liberty is to science what air is to animals.",
+      "fr": "La liberté est pour la Science ce que l'air est pour l'animal."
+    }
+  },
+  {
+    "code": "Alexandre Dumas",
+    "name": {
+      "en": "All for one, one for all.",
+      "fr": "Tous pour un, un pour tous."
+    }
+  },
+  {
+    "code": "Paul Valéry",
+    "name": {
+      "en": "A lone man is always in poor company.",
+      "fr": "Un homme seul est toujours en mauvaise compagnie."
+    }
+  },
+  {
+    "code": "Jean de La Fontaine",
+    "name": {
+      "en": "I use animals to teach men.",
+      "fr": "Je me sers d'animaux pour instruire les hommes."
+    }
+  },
+  {
+    "code": "Louis Pasteur",
+    "name": {
+      "en": "Science has no homeland.",
+      "fr": "La science n'a pas de patrie."
+    }
+  },
+  {
+    "code": "Antoine de Saint-Exupéry",
+    "name": {
+      "en": "We see well only with the heart.",
+      "fr": "On ne voit bien qu'avec le coeur."
+    }
+  },
+  {
+    "code": "Jean Racine",
+    "name": {
+      "en": "The more dearly I hold the offender, the more strongly I feel the insult.",
+      "fr": "Plus l'offenseur m'est cher, plus je ressens l'injure."
+    }
+  }
+]
