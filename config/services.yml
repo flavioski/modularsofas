@@ -3,6 +3,64 @@ imports:
   - { resource: ./common.yml }
 
 services:
+  # Form services
+  flavioski.module.modularsofas.type.modular:
+    class: 'Flavioski\Module\ModularSofas\Form\ModularType'
+    parent: 'form.type.translatable.aware'
+    public: true
+    arguments:
+      - '@flavioski.module.modularsofas.form.choice_provider.product_attribute_by_id'
+      - '@=service("prestashop.adapter.data_provider.currency").getDefaultCurrency()'
+      - '@router'
+    tags:
+      - { name: form.type }
+
+  flavioski.module.modularsofas.type.product_choice:
+    class: 'Flavioski\Module\ModularSofas\Form\Type\ProductChoiceType'
+    arguments:
+      - '@flavioski.module.modularsofas.form.choice_provider.product_by_id'
+      - '@flavioski.module.modularsofas.form.choice_provider.product_by_id'
+    tags:
+      - { name: form.type }
+
+  flavioski.module.modularsofas.form.choice_provider.product_by_id:
+    class: 'Flavioski\Module\ModularSofas\Form\ChoiceProvider\ProductByIdChoiceProvider'
+    arguments:
+      - '@=service("prestashop.adapter.legacy.context").getLanguage().id'
+
+  flavioski.module.modularsofas.form.choice_provider.product_attribute_by_id:
+    class: 'Flavioski\Module\ModularSofas\Form\ChoiceProvider\ProductAttributeByIdChoiceProvider'
+
+  flavioski.module.modularsofas.domain.product.product_required_fields_provider:
+    class: 'Flavioski\Module\ModularSofas\Domain\Product\ProductRequiredFieldsProvider'
+    arguments:
+      - '@prestashop.adapter.attribute.repository.attribute_repository'
+
+  flavioski.module.modularsofas.form.identifiable_object.data_provider.modular_form_data_provider:
+    class: 'Flavioski\Module\ModularSofas\Form\ModularFormDataProvider'
+    arguments:
+      - '@flavioski.module.modularsofas.repository.modular_repository'
+
+  flavioski.module.modularsofas.form.identifiable_object.builder.modular_form_builder:
+    class: 'PrestaShop\PrestaShop\Core\Form\IdentifiableObject\Builder\FormBuilder'
+    factory: 'prestashop.core.form.builder.form_builder_factory:create'
+    arguments:
+      - 'Flavioski\Module\ModularSofas\Form\ModularType'
+      - '@flavioski.module.modularsofas.form.identifiable_object.data_provider.modular_form_data_provider'
+
+  flavioski.module.modularsofas.form.identifiable_object.data_handler.modular_form_data_handler:
+    class: 'Flavioski\Module\ModularSofas\Form\ModularFormDataHandler'
+    arguments:
+      - '@flavioski.module.modularsofas.repository.modular_repository'
+      - '@prestashop.core.admin.lang.repository'
+      - '@doctrine.orm.default_entity_manager'
+
+  flavioski.module.modularsofas.form.identifiable_object.handler.modular_form_handler:
+    class: 'PrestaShop\PrestaShop\Core\Form\IdentifiableObject\Handler\FormHandler'
+    factory: 'prestashop.core.form.identifiable_object.handler.form_handler_factory:create'
+    arguments:
+      - '@flavioski.module.modularsofas.form.identifiable_object.data_handler.modular_form_data_handler'
+
   # Grid services
   flavioski.module.modularsofas.grid.definition.factory.modulars:
     class: 'Flavioski\Module\ModularSofas\Grid\Definition\Factory\ModularGridDefinitionFactory'
