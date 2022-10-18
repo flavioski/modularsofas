@@ -35,3 +35,12 @@ services:
       - '@flavioski.module.modularsofas.grid.data_provider.modulars'
       - '@prestashop.core.grid.filter.form_factory'
       - '@prestashop.core.hook.dispatcher'
+
+  # Generator service
+  flavioski.module.modularsofas.modulars.generator:
+    class: 'Flavioski\Module\ModularSofas\Database\ModularGenerator'
+    arguments:
+      - '@flavioski.module.modularsofas.repository.modular_repository'
+      - '@prestashop.core.admin.lang.repository'
+      - '@prestashop.core.admin.shop.repository'
+      - '@doctrine.orm.default_entity_manager'
