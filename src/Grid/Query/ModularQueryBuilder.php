@@ -53,7 +53,7 @@ class ModularQueryBuilder extends AbstractDoctrineQueryBuilder
      */
     public function __construct(
         Connection $connection,
-                   $dbPrefix,
+        $dbPrefix,
         DoctrineSearchCriteriaApplicatorInterface $searchCriteriaApplicator,
         $languageId,
         $shopId
