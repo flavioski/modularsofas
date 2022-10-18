@@ -15,7 +15,7 @@
  * to flappio.pelliccia@gmail.com so we can send you a copy immediately.
  *
  * @author    Flavio Pellizzer
- * @copyright Since 2021 Flavio Pellizzer
+ * @copyright Since 2022 Flavio Pellizzer
  * @license   https://opensource.org/licenses/MIT
  */
 header('Expires: Mon, 26 Jul 1997 05:00:00 GMT');
