@@ -23,7 +23,7 @@ declare(strict_types=1);
 namespace Flavioski\Module\ModularSofas\Domain\Product\QueryResult;
 
 /**
- * Stores data about treatment fields which are required by product
+ * Stores data about modular fields which are required by product
  */
 class ProductRequiredFields
 {
