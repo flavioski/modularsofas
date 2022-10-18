@@ -93,6 +93,11 @@ class ModularGridDefinitionFactory extends AbstractGridDefinitionFactory
     protected function getColumns()
     {
         return (new ColumnCollection())
+            ->add((new BulkActionColumn('bulk'))
+                ->setOptions([
+                    'bulk_field' => 'id_modular',
+                ])
+            )
             ->add((new DataColumn('id_modular'))
                 ->setName($this->trans('ID', [], 'Admin.Global'))
                 ->setOptions([
@@ -100,7 +105,59 @@ class ModularGridDefinitionFactory extends AbstractGridDefinitionFactory
                     'sortable' => true,
                 ])
             )
-            ;
+            ->add((new DataColumn('code'))
+                ->setName($this->trans('Code', [], 'Admin.Global'))
+                ->setOptions([
+                    'field' => 'code',
+                ])
+            )
+            ->add((new DataColumn('name'))
+                ->setName($this->trans('Name', [], 'Admin.Global'))
+                ->setOptions([
+                    'field' => 'name',
+                ])
+            )
+            ->add((new ToggleColumn('active'))
+                ->setName($this->trans('Status', [], 'Admin.Global'))
+                ->setOptions([
+                    'field' => 'active',
+                    'primary_field' => 'id_modular',
+                    'route' => 'flavioski_modularsofas_modular_toggle_status',
+                    'route_param_name' => 'modularId',
+                ])
+            )
+            ->add((new ActionColumn('actions'))
+                ->setName($this->trans('Actions', [], 'Admin.Global'))
+                ->setOptions([
+                    'actions' => (new RowActionCollection())
+                        ->add((new LinkRowAction('edit'))
+                            ->setName($this->trans('Edit', [], 'Admin.Actions'))
+                            ->setIcon('edit')
+                            ->setOptions([
+                                'route' => 'flavioski_modularsofas_modular_edit',
+                                'route_param_name' => 'modularId',
+                                'route_param_field' => 'id_modular',
+                                'clickable_row' => true,
+                            ])
+                        )
+                        ->add((new SubmitRowAction('delete'))
+                            ->setName($this->trans('Delete', [], 'Admin.Actions'))
+                            ->setIcon('delete')
+                            ->setOptions([
+                                'method' => 'DELETE',
+                                'route' => 'flavioski_modularsofas_modular_delete',
+                                'route_param_name' => 'modularId',
+                                'route_param_field' => 'id_modular',
+                                'confirm_message' => $this->trans(
+                                    'Delete selected item?',
+                                    [],
+                                    'Admin.Notifications.Warning'
+                                ),
+                            ])
+                        ),
+                ])
+            )
+        ;
     }
 
     /**
@@ -118,6 +175,31 @@ class ModularGridDefinitionFactory extends AbstractGridDefinitionFactory
                 ])
                 ->setAssociatedColumn('id_modular')
             )
+            ->add((new Filter('code', TextType::class))
+                ->setTypeOptions([
+                    'required' => false,
+                    'attr' => [
+                        'placeholder' => $this->trans('Code', [], 'Admin.Global'),
+                    ],
+                ])
+                ->setAssociatedColumn('code')
+            )
+            ->add((new Filter('name', TextType::class))
+                ->setTypeOptions([
+                    'required' => false,
+                    'attr' => [
+                        'placeholder' => $this->trans('Name', [], 'Admin.Global'),
+                    ],
+                ])
+                ->setAssociatedColumn('name')
+            )
+            ->add((new Filter('active', YesAndNoChoiceType::class))
+                ->setTypeOptions([
+                    'required' => false,
+                    'choice_translation_domain' => false,
+                ])
+                ->setAssociatedColumn('active')
+            )
             ->add((new Filter('actions', SearchAndResetType::class))
                 ->setTypeOptions([
                     'attr' => [
@@ -132,7 +214,7 @@ class ModularGridDefinitionFactory extends AbstractGridDefinitionFactory
                 ])
                 ->setAssociatedColumn('actions')
             )
-            ;
+        ;
     }
 
     /**
@@ -152,6 +234,22 @@ class ModularGridDefinitionFactory extends AbstractGridDefinitionFactory
             ->add((new SimpleGridAction('common_export_sql_manager'))
                 ->setName($this->trans('Export to SQL Manager', [], 'Admin.Actions'))
                 ->setIcon('storage')
+            )
+        ;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getBulkActions()
+    {
+        return (new BulkActionCollection())
+            ->add((new SubmitBulkAction('delete_bulk'))
+                ->setName($this->trans('Delete selected', [], 'Admin.Actions'))
+                ->setOptions([
+                    'submit_route' => 'flavioski_modularsofas_modular_bulk_delete',
+                    'confirm_message' => $this->trans('Delete selected items?', [], 'Admin.Notifications.Warning'),
+                ])
             )
             ;
     }

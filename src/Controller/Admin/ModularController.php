@@ -22,21 +22,17 @@ declare(strict_types=1);
 
 namespace Flavioski\Module\ModularSofas\Controller\Admin;
 
-use Flavioski\Module\ModularSofas\Grid\Definition\Factory\ModularGridDefinitionFactory;
 use Flavioski\Module\ModularSofas\Grid\Filters\ModularFilters;
 use PrestaShopBundle\Controller\Admin\FrameworkBundleAdminController;
 use PrestaShopBundle\Security\Annotation\AdminSecurity;
 use PrestaShopBundle\Security\Annotation\DemoRestricted;
-use PrestaShopBundle\Service\Grid\ResponseBuilder;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ModularController extends FrameworkBundleAdminController
 {
     /**
-     * List treatments
+     * List modulars
      *
      * @AdminSecurity(
      *     "is_granted(['read'], request.get('_legacy_controller'))",
@@ -88,6 +84,14 @@ class ModularController extends FrameworkBundleAdminController
      */
     public function generateAction(Request $request)
     {
+        if ($request->isMethod('POST')) {
+            $generator = $this->get('flavioski.module.modularsofas.modulars.generator');
+            $generator->generateModulars();
+            $this->addFlash('success', $this->trans('Modulars were successfully generated.', 'Modules.ModularSofas.Admin'));
+
+            return $this->redirectToRoute('flavioski_modularsofas_modular_index');
+        }
+
         return $this->render(
             '@Modules/modularsofas/views/templates/admin/modular/generate.html.twig',
             [
