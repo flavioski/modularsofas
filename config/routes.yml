@@ -35,3 +35,51 @@ flavioski_modularsofas_modular_generate:
     _controller: 'Flavioski\Module\ModularSofas\Controller\Admin\ModularController::generateAction'
     _legacy_controller: 'AdminModularSofasModular'
     _legacy_link: 'AdminModularSofasModular:generate'
+
+flavioski_modularsofas_modular_create:
+  path: /modularsofas/modular/new
+  methods: [GET, POST]
+  defaults:
+    _controller: 'Flavioski\Module\ModularSofas\Controller\Admin\ModularController::createAction'
+    _legacy_controller: 'AdminModularSofasModular'
+    _legacy_link: 'AdminModularSofasModular:add'
+
+flavioski_modularsofas_modular_edit:
+  path: /modularsofas/modular/{modularId}/edit
+  methods: [GET, POST]
+  defaults:
+    _controller: 'Flavioski\Module\ModularSofas\Controller\Admin\ModularController::editAction'
+    _legacy_controller: 'AdminModularSofasModular'
+    _legacy_link: 'AdminModularSofasModular:update'
+  requirements:
+    modularId: \d+
+
+flavioski_modularsofas_modular_delete:
+  path: /modularsofas/modular/{modularId}/delete
+  methods: [DELETE]
+  defaults:
+    _controller: 'Flavioski\Module\ModularSofas\Controller\Admin\ModularController::deleteAction'
+    _legacy_controller: 'AdminModularSofasModular'
+    _legacy_link: 'AdminModularSofasModular:deletemodular'
+  requirements:
+    modularId: \d+
+
+flavioski_modularsofas_modular_bulk_delete:
+  path: /modularsofas/modular/bulkDelete
+  methods: [POST]
+  defaults:
+    _controller: 'Flavioski\Module\ModularSofas\Controller\Admin\ModularController::deleteBulkAction'
+    _legacy_controller: 'AdminModularSofasModular'
+    _legacy_link: 'AdminModularSofasModular:submitBulkdeletemodular'
+
+flavioski_modularsofas_modular_toggle_status:
+  path: /modularsofas/modular/{modularId}/toggle-status
+  methods: [POST]
+  defaults:
+    _controller: 'Flavioski\Module\ModularSofas\Controller\Admin\ModularController::toggleStatusAction'
+    _legacy_controller: 'AdminModularSofasModular'
+    _legacy_link: 'AdminModularSofasModular:statusmodular'
+    _legacy_parameters:
+      id_modular: modularId
+  requirements:
+    modularId: \d+
