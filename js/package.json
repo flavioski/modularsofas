@@ -23,12 +23,15 @@
     "webpack": "^2.7"
   },
   "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "NODE_ENV=production webpack --progress --colors --debug --display-chunks",
     "dev": "webpack --progress --colors --debug --display-chunks --watch",
+    "serve": "webpack serve --mode=development",
     "watch": "npm run dev",
-    "lint:js": "eslint '**/*.{js,jsx}' --quiet",
     "lint": "npm run lint:js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint:js": "eslint '**/*.{js,jsx}' --quiet",
+    "scss-lint": "stylelint \"**/*.scss\" --formatter verbose",
+    "scss-fix": "stylelint \"**/*.scss\" --fix"
   },
   "author": "",
   "license": "MIT"
